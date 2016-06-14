@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << './lib'
+
+require 'flicket'
+
+Flicket::CLI.start(ARGV)
