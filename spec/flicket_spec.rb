@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-describe Flicket do
+describe Flicket, :vcr do
+  it 'can be run from command line' do
+    expect(File.stat('./bin/flicket').executable?).to be true
+  end
+
   it 'has a version number' do
     expect(Flicket::VERSION).not_to be nil
   end
 
-  it 'can be run from command line' do
-    expect(`./bin/flicket`).to_not be_nil
+  it 'runs successfully' do
+    expect { described_class::CLI.start(['hello', 'flickr']) }.to_not raise_error
   end
-
-  it 'provided keyword is in output when run from command line' do
-    expect { system("./bin/flicket first second") }.to output(/first/m).to_stdout_from_any_process
-  end
-
 end
