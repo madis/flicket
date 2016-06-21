@@ -1,5 +1,6 @@
 require 'ostruct'
 require 'flickraw'
+require 'optparse'
 
 require "flicket/version"
 require 'flicket/environment'
@@ -11,15 +12,31 @@ require 'flicket/collage_maker'
 require 'flicket/storage'
 
 module Flicket
+
   class CLI
-    def self.start(keywords)
-      puts "Flicket"
+    def self.start(args)
+      puts "Flicket #{VERSION}\n"
+      keywords, options = parse_args(args)
+      puts "Got keywords: #{keywords} options: #{options}"
       puts "Using initial keywords #{keywords.join(' ')}"
-      env = setup_env(keywords)
+      env = setup_env(keywords, options)
       App.new(env).call
     end
 
-    def self.setup_env(keywords)
+    def self.parse_args(args)
+      options = {}
+      parser = OptionParser.new do |opts|
+        opts.banner = "Usage: flicket [options] [keywords...]"
+        opts.on("-o", "--output [FILENAME]", "Output filename to store collage") do |o|
+          options[:output] = o
+        end
+      end
+      parser.parse!(args)
+      keywords = args
+      [keywords, options]
+    end
+
+    def self.setup_env(keywords, options={})
       flicker_query = setup_flicker_query
       keyword_source = setup_keyword_source
       keyword_source.add_user_words keywords
@@ -27,6 +44,7 @@ module Flicket
       downloader = Downloader.new
       collage_maker = CollageMaker.new
       storage = Storage.new
+      storage.output_filename = options[:output]
       Environment.new(
         flicker_query: flicker_query,
         downloader: downloader,

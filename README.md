@@ -38,6 +38,8 @@ export FLICKR_SECRET=xxxxxxxxxxxxxxxx # Replace with your secret
 3. After building and installing the gem: `flicket [keyword ...]`
 4. Or inside the gem's source folder (after installing dependencies with `bundle install`): `./bin/flicket [keyword ...]`
 
+> NB! Output filename can be provided with `--output or -o` e.g. `flicket -o mycollage.png tree river bratwurst`
+
 ## Development
 
 Most of the code is covered with tests using RSpec. [VCR](https://github.com/vcr/vcr) is used to avoid hitting Flickr api every time and to speed up tests.
