@@ -9,7 +9,13 @@ describe Flicket, :vcr do
     expect(Flicket::VERSION).not_to be nil
   end
 
+  before do
+    # Set environment variables to something
+    # which works because VCR intercepts the real requests anyway
+    ENV['FLICKR_KEY'] ||= '123'
+    ENV['FLICKR_SECRET'] ||= '456'
+  end
   it 'runs successfully' do
-    expect { described_class::CLI.start(['hello', 'flickr']) }.to_not raise_error
+    expect { described_class::CLI.start(['hello', 'flickr', '-o', 'collage.png']) }.to_not raise_error
   end
 end

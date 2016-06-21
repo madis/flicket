@@ -13,7 +13,7 @@ describe Flicket::Downloader, :vcr do
 
   let(:random_port) { rand(20000..65535) }
   let(:server_thread) { Thread.new { start_server } }
-  let(:download_url) { "http://localhost:#{random_port}/dict.txt" }
+  let(:download_url) { "http://0.0.0.0:#{random_port}/dict.txt" }
   let(:original_file) { "#{spec_folder}/fixtures/dict.txt" }
   let(:subject) { described_class.new }
 
