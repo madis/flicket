@@ -16,18 +16,9 @@ result in a match, it retrieves random words from a dictionary
 source such as `/usr/share/dict/words`. Repeating as necessary
 until you have gathered ten images.
 
-## Installation
-
-```
-git clone https://github.com/madis/flicket.git
-cd flicket
-bundle install
-rake build
-gem install pkg/flicket.gem
-```
-
 ## Usage
 
+1. Install [ImageMagick](http://www.imagemagick.org/). On OS X it can be done with Homebrew `brew install imagemagick`.
 1. Obtain flickr API key from https://www.flickr.com/services/apps/create/apply
 2. Export them as environment variables
 ```bash
@@ -35,17 +26,15 @@ export FLICKR_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx # Replace with your key
 export FLICKR_SECRET=xxxxxxxxxxxxxxxx # Replace with your secret
 ```
 
-3. After building and installing the gem: `flicket [keyword ...]`
-4. Or inside the gem's source folder (after installing dependencies with `bundle install`): `./bin/flicket [keyword ...]`
+3. Install *Flicket*: `gem install flicket`
+4. Generate some collages: `flicket dog cat doormat`
 
 > NB! Output filename can be provided with `--output or -o` e.g. `flicket -o mycollage.png tree river bratwurst`
+
 
 ## Development
 
 Most of the code is covered with tests using RSpec. [VCR](https://github.com/vcr/vcr) is used to avoid hitting Flickr api every time and to speed up tests.
-
-[ImageMagick](http://www.imagemagick.org/) must be installed too. On OS X it can be done with Homebrew `brew install imagemagick`.
-
 
 1. Clone the repo `git clone https://github.com/madis/flicket`
 2. Install dependencies `cd flicket && bundle install`
