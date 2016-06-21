@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'webrick'
 
-describe Flicket::Downloader, :vcr do
+describe Flicket::Downloader, :vcr, :tcp do
   def start_server
     WEBrick::HTTPServer.new(
     Port: random_port,
