@@ -31,7 +31,7 @@ module Flicket
     def add_image_to_canvas(image, rect, canvas_tempfile)
       canvas = MiniMagick::Image.new canvas_tempfile.path
       result = canvas.composite(image) do |c|
-        puts "Composing over #{image}"
+        puts "Adding image to collage #{image}"
         c.compose 'Over'
         c.geometry rect.to_minimagick
       end

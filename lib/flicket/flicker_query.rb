@@ -42,6 +42,7 @@ module Flicket
 
     def call(keyword)
       raise KeywordMissing, "Search keyword is required (can't be nil)" if keyword.nil?
+      puts "Searching images for keyword '#{keyword}'"
       results = @search_command.call(keyword)
       raise NoImageForKeyword if results.count == 0
       get_image_url(results.first['id'])
@@ -51,7 +52,7 @@ module Flicket
 
     def get_image_url(photo_id)
       sizes = @sizes_command.call(photo_id)
-      middle = sizes.count / 2
+      middle = sizes.count / 2 # Will pick middle sized image from the ones available
       sizes[middle]['source']
     end
   end
