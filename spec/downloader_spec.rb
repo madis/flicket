@@ -5,6 +5,7 @@ describe Flicket::Downloader, :vcr do
   def start_server
     WEBrick::HTTPServer.new(
     Port: random_port,
+    BindAddress: '0.0.0.0',
     DocumentRoot: "#{spec_folder}/fixtures",
     Logger: WEBrick::Log.new("/dev/null"),
     AccessLog: WEBrick::Log.new("/dev/null")
