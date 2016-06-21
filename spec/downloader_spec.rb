@@ -1,10 +1,11 @@
 require 'spec_helper'
 require 'webrick'
 
-describe Flicket::Downloader, :vcr do
+describe Flicket::Downloader, :vcr, :tcp do
   def start_server
     WEBrick::HTTPServer.new(
     Port: random_port,
+    BindAddress: '0.0.0.0',
     DocumentRoot: "#{spec_folder}/fixtures",
     Logger: WEBrick::Log.new("/dev/null"),
     AccessLog: WEBrick::Log.new("/dev/null")
@@ -13,7 +14,7 @@ describe Flicket::Downloader, :vcr do
 
   let(:random_port) { rand(20000..65535) }
   let(:server_thread) { Thread.new { start_server } }
-  let(:download_url) { "http://localhost:#{random_port}/dict.txt" }
+  let(:download_url) { "http://0.0.0.0:#{random_port}/dict.txt" }
   let(:original_file) { "#{spec_folder}/fixtures/dict.txt" }
   let(:subject) { described_class.new }
 
