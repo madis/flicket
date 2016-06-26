@@ -11,8 +11,6 @@ module Flicket
 
     def call(image_paths)
       images = image_paths.map { |p| MiniMagick::Image.open p.path }
-      min_height = images.min_by(&:height).height
-      min_width = images.min_by(&:width).width
       canvas_tempfile = Tempfile.new ['collage_maker', '.png']
       canvas = create_new_image(path: canvas_tempfile.path)
 
