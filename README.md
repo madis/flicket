@@ -60,4 +60,10 @@ LAYOUT = [
 The numbers in the matrix are *cell names*. To mark bigger cell, e.g. cell **4** that is double the height of single cell, use same name in consequtive rows. Layout calculator will crop and resize automatically
 
 > NB The LayoutCalculator may not handle more complex layouts correctly in its initial incarnation. It is mainly here as a starting point and a direction for future development.
-gg
+
+## Example
+
+`flicket -o collage.png flower powerlifter programmer snoop snow nature sunset computer guitar woman`
+
+
+![example collage](docs/collage.png)
